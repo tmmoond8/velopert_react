@@ -3,7 +3,22 @@ import React, { Component } from 'react';
 class EventPractice extends Component {
 
   state = {
-    message: ''
+    message: '',
+    username: ''
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleClick = () => {
+    alert(`${this.state.message} ${this.state.username}`);
+    this.setState({
+      message: '',
+      username: ''
+    });
   }
   render() {
     return (
@@ -14,22 +29,16 @@ class EventPractice extends Component {
           name="message"
           placeholder="아무거나 입력"
           value={this.state.message}
-          onChange={
-            (e) => { 
-              this.setState({
-                message: e.target.value
-              })
-            }
-          }
+          onChange={this.handleChange}
         />
-        <button onClick={
-          () => {
-            alert(this.state.message);
-            this.setState({
-              message: ''
-            });
-          }
-        }>확인</button>
+        <input
+        type="text"
+        name="username"
+        placeholder="이름 입력 입력"
+        value={this.state.username}
+        onChange={this.handleChange}
+      />
+        <button onClick={this.handleClick}>확인</button>
       </div>
     )
   }
