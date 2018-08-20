@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
 import MyComponent from './MyComponent';
+import EventPractice from './EventPractice';
 
 class App extends Component {
   render() {
@@ -32,7 +33,8 @@ class App extends Component {
             // skdjfljlfksaslda
             // sdflsjsa
           />
-          <MyComponent/>
+          {/* <MyComponent/> */}
+          <EventPractice/>
         </div>
       </Fragment>
     );
