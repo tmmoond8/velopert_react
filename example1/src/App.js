@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
+import MyComponent from './MyComponent';
 
 class App extends Component {
   render() {
@@ -15,6 +16,8 @@ class App extends Component {
       msTransition: 'all'
     };
 
+    const testText = '깔깔깔깔';
+
     return (
       <Fragment>
         <div className="my-div">
@@ -29,6 +32,7 @@ class App extends Component {
             // skdjfljlfksaslda
             // sdflsjsa
           />
+          <MyComponent/>
         </div>
       </Fragment>
     );
