@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from './App.css';
+import styles from './App.scss';
 import classnames from 'classnames/bind';
 const cx = classnames.bind(styles);
 
@@ -10,7 +10,7 @@ class App extends Component {
     const isBlue = true;
     return (
       <div className={cx('box', { blue: isBlue })}>
-
+        <div className={cx('box-inside')}/>
       </div>
     );
   }
