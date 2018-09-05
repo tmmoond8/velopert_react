@@ -7,10 +7,21 @@ const cx = className.bind(styles);
 
 class TodoList extends Component {
   render() {
+    const { todos, onToggle, onRemove } = this.props;
     return (
       <div>
-        <TodoItem done>리액트 공부하기</TodoItem>
-        <TodoItem>리액트 스타일링 하기</TodoItem>
+        {todos && todos.map((todo) => {
+          return (
+            <TodoItem 
+              id={todo.id} 
+              done={todo.done} 
+              onToggle={onToggle} 
+              onRemove={onRemove}
+              key={todo.id}
+              >{todo.text}
+            </TodoItem>
+          )
+        })}
       </div>
     )
   }

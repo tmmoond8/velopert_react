@@ -6,12 +6,12 @@ const cx = className.bind(styles);
 
 class TodoItem extends Component {
   render() {
-    const {done, children, onToggle, onRemove} = this.props;
+    const {id, done, children, onToggle, onRemove} = this.props;
     return (
-      <div className={cx('todo-item')} onClick={onToggle}>
+      <div className={cx('todo-item')} onClick={() => onToggle(id)}>
         <input className={cx('tick')} type="checkbox" checked={done} readOnly/>
         <div className={cx('text', {done})}>{children}</div>
-        <div className={cx('delete')} onClick={onRemove}>지우기</div>
+        <div className={cx('delete')} onClick={(e) => {e.stopPropagation(); onRemove(id)}}>지우기</div>
       </div>
     )
   }
