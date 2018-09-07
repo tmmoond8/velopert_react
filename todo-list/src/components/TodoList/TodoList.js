@@ -6,6 +6,9 @@ import TodoItem from '../TodoItem';
 const cx = className.bind(styles);
 
 class TodoList extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.todos !== nextProps.todos;
+  }
   render() {
     const { todos, onToggle, onRemove } = this.props;
     return (
