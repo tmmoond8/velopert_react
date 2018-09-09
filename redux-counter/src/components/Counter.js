@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Counter.css';
 
-const Counter = ({number, color, onIncrement, onDecrement, onSetColor}) => {
+const Counter = ({number, index, color, onIncrement, onDecrement, onSetColor}) => {
     return (
         <div
             className="Counter"
-            onClick={onIncrement}
+            onClick={() => onIncrement(index)}
             onContextMenu={(e) => {
                 e.preventDefault();
-                onDecrement();
+                onDecrement(index);
             }}
-            onDoubleClick={onSetColor}
+            onDoubleClick={() => onSetColor(index)}
             style={{
                 backgroundColor: color
             }}
@@ -30,6 +30,7 @@ Counter.propTypes = {
 };
 
 Counter.defaultProps = {
+    index: 0,
     number: 0,
     color: 'black',
     onIncrement: () => console.warn('onIncrement not default'),
