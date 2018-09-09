@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Button.scss';
+import styles from './Buttons.scss';
 import classnames from 'classnames/bind';
 
 const cx = classnames.bind(styles);
