@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import CounterContainer from '../containers/CounterContainer';
-import Button from '../components/Button';
+import Button from '../components/Buttons';
 
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import CounterListContainer from './CounterListContainer';
+import { getRandomColor } from '../lib/util';
 
 
 class App extends Component {
@@ -15,14 +16,14 @@ class App extends Component {
                     onCreate={onCreate}
                     onRemove={onRemove}
                 />
-                <CounterContainer/>
+                <CounterListContainer/>
             </div>
         )
     }
 }
 
 const mapToDispatch = (dispatch) => ({
-    onCreate: () => dispatch(actions.create('#124322')),
+    onCreate: () => dispatch(actions.create(getRandomColor())),
     onRemove: () => dispatch(actions.remove())
 });
 

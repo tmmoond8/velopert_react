@@ -1,8 +1,8 @@
-.Button {
+.Buttons {
     display: flex;
 }
 
-.Button .btn {
+.Buttons .btn {
     flex: 1;
     display: flex;
     align-items: center;
@@ -21,10 +21,10 @@
     background: #40c057;
 }
 
-.Button .remove {
+.Buttons .remove {
     background: #f03e3e;
 }
 
-.Button .remove:hover {
+.Buttons .remove:hover {
     background: #fa5252;
 }

@@ -28,7 +28,7 @@ function counter(state = initialState, action) {
         case types.INCREMENT:
             return {
                 counters: [
-                    ...counters.slice(0, action, action.index),
+                    ...counters.slice(0, action.index),
                     {
                         ...counters[action.index],
                         number: counters[action.index].number + 1
