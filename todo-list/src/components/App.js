@@ -3,7 +3,7 @@ import PageTemplate from './PageTemplate';
 import TodoInput from './TodoInput';
 import TodoList from './TodoList';
 
-const initailTodos = new Array(500).fill(0).map(
+const initailTodos = new Array(1).fill(0).map(
   (foo, index) => ({id: index, text: `일정 ${foo}`, done: false})
 );
 
