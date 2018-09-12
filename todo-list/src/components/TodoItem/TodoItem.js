@@ -5,9 +5,9 @@ import className from 'classnames/bind';
 const cx = className.bind(styles);
 
 class TodoItem extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.props.done !== nextProps.done;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return this.props.done !== nextProps.done;
+  // }
   render() {
     const {id, done, children, onToggle, onRemove} = this.props;
     return (
