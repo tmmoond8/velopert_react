@@ -31,9 +31,10 @@ class TodoInputContainer extends Component {
     }
 
     render() {
-        const { handleInsert } = this;
+        const { handleInsert, handleChange } = this;
+        const { value } = this.props;
         return (
-            <TodoInput onInsert={handleInsert}/>
+            <TodoInput value={value} onChange={handleChange} onInsert={handleInsert}/>
         );
     }
 }
