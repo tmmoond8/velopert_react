@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from './TodoItem.scss'
+import styles from './TodoItem.css'
 import className from 'classnames/bind';
 
 const cx = className.bind(styles);
