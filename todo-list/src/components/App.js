@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PageTemplate from './PageTemplate';
-import TodoInput from './TodoInput';
-import TodoList from './TodoList';
+import TodoInputContainer from '../containers/TodoInputContainer';
+import TodoListContainer from '../containers/TodoListContainer';
 
 const initailTodos = new Array(500).fill(0).map(
   (foo, index) => ({id: index, text: `일정 ${foo}`, done: false})
@@ -59,10 +59,14 @@ class App extends Component {
     const { input, todos } = this.state;
     const { handleChange, handleInsert, handleToggle, handleRemove} = this;
     return (
-     <PageTemplate>
-       <TodoInput onChange={handleChange} value={input} onInsert={handleInsert}/>
-       <TodoList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
-     </PageTemplate>
+    //  <PageTemplate>
+    //    <TodoInput onChange={handleChange} value={input} onInsert={handleInsert}/>
+    //    <TodoList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
+    //  </PageTemplate>
+        <PageTemplate>
+          <TodoInputContainer/>
+          <TodoListContainer/>
+        </PageTemplate>
     );
   }
 }
