@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 const Menu = () => {
-
   const activeStyle = {
     color: 'green',
     fontSize: '2rem'
@@ -17,6 +16,7 @@ const Menu = () => {
         <li><NavLink exact to="/" activeStyle={activeStyle}>홈</NavLink></li>
         <li><NavLink exact to="/about" activeStyle={activeStyle}>소개</NavLink></li>
         <li><NavLink to="/about/react" activeStyle={activeStyle}>리액트 소개</NavLink></li>
+        <li><NavLink to="/post/}" activeStyle={activeStyle}>포스트</NavLink></li>
       </ul>
     </div>
   )
