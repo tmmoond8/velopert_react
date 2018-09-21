@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { Home, About, Post } from 'pages';
+import { Home, About, Posts } from 'pages';
 import Menu from 'components/Menu';
 
 const App = () => {
@@ -9,7 +9,7 @@ const App = () => {
       <Menu/>
       <Route exact path="/" component={Home}/>
       <Route path="/about/:name" component={About}/>
-      <Route path="/post/:id" component={Post}/>
+      <Route path="/posts" component={Posts}/>
     </div>
   );
 }
