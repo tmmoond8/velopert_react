@@ -13,6 +13,7 @@ const posts = [{
 exports.write = (ctx) => {
   // REST API의 request body 는 ctx.request.body에서 조회할 수 있습니다.
   const { title, body } = ctx.request.body;
+  console.log(ctx.request.body);
 
   postsId += 1;
   const post = { id: postsId, title, body };
