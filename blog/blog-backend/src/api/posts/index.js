@@ -7,7 +7,7 @@ posts.get('/', postCtrl.list);
 posts.post('/', postCtrl.write);
 posts.get('/:id', postCtrl.read);
 posts.delete('/:id', postCtrl.remove);
-posts.put('/:id', postCtrl.replace);
+// posts.put('/:id', postCtrl.replace); 제거 됨
 posts.patch('/:id', postCtrl.update);
 
 module.exports = posts;
