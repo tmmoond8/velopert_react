@@ -1,4 +1,21 @@
 const Post = require('models/post');
+const { ObjectId } = require('mongoose').Types;
+const Joi = require('joi');
+
+/**
+ * 올바른 mongoDB _id 값인지 검증
+ * 올바른 값이 아니라면 400 Error를, 올바른 값이면 진행한다.
+ * @param {*} ctx 
+ * @param {*} next 
+ */
+exports.checkObjectId = (ctx, next) => {
+  const { id } = ctx.params;
+  if (!ObjectId.isValid(id)) {
+    ctx.status = 400;
+    return null;
+  }
+  return next();
+};
 
 /**
  * POST /api/posts
@@ -7,6 +24,19 @@ const Post = require('models/post');
  */
 exports.write = async (ctx) => {
   const { title, body, tags } = ctx.request.body;
+  const schema = Joi.object().keys({
+    title: Joi.string().required(),
+    body: Joi.string().required(),
+    tags: Joi.array().items(Joi.string()).required(),
+  });
+
+  const result = Joi.validate(ctx.request.body, schema);
+
+  if (result.error) {
+    ctx.status = 400;
+    ctx.body = result.error;
+  }
+
   const post = new Post({
     title, body, tags,
   });
@@ -18,15 +48,32 @@ exports.write = async (ctx) => {
   }
 };
 exports.list = async (ctx) => {
+  const page = parseInt(ctx.query.page || 1, 10);
+  if (page < 1) {
+    ctx.status = 400;
+    return;
+  }
   try {
-    const posts = await Post.find().exec();
-    ctx.body = posts;
+    const posts = await Post.find()
+      .sort({ _id: -1 })
+      .limit(10)
+      .skip((page - 1) * 10)
+      .lean()
+      .exec();
+
+    const postCount = await Post.count().exec();
+    ctx.set('Last-Page', Math.ceil(postCount / 10));
+    ctx.body = posts.map(post => ({
+      ...post,
+      body: post.body.length < 200 ? post.body : `${post.body.slice(0, 200)}...`,
+    }));
   } catch (e) {
     ctx.throw(e, 500);
   }
 };
 exports.read = async (ctx) => {
   const { id } = ctx.params;
+
   try {
     const post = await Post.findById(id).exec();
     if(!post) {
