@@ -12,7 +12,7 @@ const EditorHeader = ({onGoBack, onSubmit}) => {
         <Button onClick={onGoBack} theme="outline">뒤로가기</Button>
       </div>
       <div className={cx('submit')}>
-        <Button onClick={onSubmit} theme="outline">작성하기</Button>
+        <Button onClick={onSubmit} theme="outline">저장하기</Button>
       </div>
     </div>
   );
