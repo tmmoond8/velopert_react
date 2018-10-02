@@ -5,12 +5,12 @@ exports.login = (ctx) => {
   console.log(adminPass);
   if (adminPass === password) {
     ctx.body = {
-      success: true
+      success: true,
     };
     ctx.session.logged = true;
   } else {
-    ctx.body  = {
-      success: false
+    ctx.body = {
+      success: false,
     }
     ctx.status = 401;
   }
@@ -18,7 +18,7 @@ exports.login = (ctx) => {
 
 exports.check = (ctx) => {
   ctx.body = {
-    logged: !!ctx.session.logged
+    logged: !!ctx.session.logged,
   };
 };
 
@@ -27,8 +27,8 @@ exports.logout = (ctx) => {
   ctx.status = 204;
 };
 
-exports.checkLogin = (ctx) => {
-  if(!ctx.session.logged) {
+exports.checkLogin = ({ ctx, next }) => {
+  if (!ctx.session.logged) {
     ctx.status = 401;
     return null;
   }

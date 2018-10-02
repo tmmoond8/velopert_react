@@ -2,17 +2,15 @@
 
 .form {
   background: white;
-  padding: 2rem;
+  padding: 1rem 2rem 2rem 2rem;
   position: relative;
-  padding-top: 2.5rem;
   width: 20rem;
   
   .close {
-    line-height: 2rem;
     font-size: 2rem;
     position: absolute;
     right: 1rem;
-    top: 0.5rem;
+    top: 0rem;
     cursor: pointer;
     &:hover {
       color: $oc-gray-6;
@@ -22,10 +20,7 @@
   .title {
     font-size: 1.25rem;
     font-weight: 500;
-  }
-
-  .description {
-    margin-top: 0.25rem;
+    margin-bottom: 1rem;
   }
 
   .error {
@@ -39,7 +34,7 @@
   input {
     width: 100%;
     font-size: 1.25rem;
-    margin-top: 0.5rem;
+    margin: 1.5rem 0;
     border: none;
     border-bottom: 1px solid $oc-gray-3;
     padding: 0.25rem;
@@ -52,10 +47,8 @@
     text-align: center;
     color: white;
     font-weight: 500;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding: 0.5rem 0;
     cursor: pointer;
-    margin-top: 1rem;
     font-size: 1.25rem;
     &:hover {
       background: $oc-blue-5;

@@ -5,8 +5,14 @@ import * as baseActions from 'store/modules/base';
 import LoginModal from 'components/modal/LoginModal';
 
 class LoginModalContainer extends Component {
-  handleLogin = () => {
-
+  handleLogin = async () => {
+    const { BaseActions, password } = this.props;
+    try {
+      await BaseActions.login(password);
+      BaseActions.hideModal('login');
+    } catch(e) {
+      console.error(e);
+    }
   }
 
   handleCancel = () => {
@@ -15,16 +21,20 @@ class LoginModalContainer extends Component {
   }
 
   handleChange = (e) => {
-
+    const { value } = e.target;
+    const { BaseActions } = this.props;
+    BaseActions.changePasswordInput(value);
   }
 
   handleKeyPress = (e) => {
-
+    if (e.key === 'Enter') {
+      this.handleLogin();
+    }
   }
 
   render() {
     const { handleLogin, handleCancel, handleChange, handleKeyPress } = this;
-    const { visible } = this.props;
+    const { visible, error, password } = this.props;
     return (
       <LoginModal
         onLogin={handleLogin} 
@@ -32,6 +42,8 @@ class LoginModalContainer extends Component {
         onChange={handleChange}
         onKeyPress={handleKeyPress}
         visible={visible}
+        error={error}
+        password={password}
       ></LoginModal>
     );
   }
@@ -39,7 +51,9 @@ class LoginModalContainer extends Component {
 
 export default connect(
   (state) => ({
-    visible: state.base.modal.login
+    visible: state.base.modal.login,
+    error: state.base.loginModal.error,
+    password: state.base.loginModal.password
   }),
   (dispatch) => ({
     BaseActions: bindActionCreators(baseActions, dispatch)

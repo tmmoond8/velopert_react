@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LoginModalContainer from 'components/modal/LoginModalContainer';
+import LoginModalContainer from 'containers/modal/LoginModalContainer';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/modules/base';
