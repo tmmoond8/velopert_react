@@ -49,24 +49,26 @@ exports.write = async (ctx) => {
 };
 exports.list = async (ctx) => {
   const page = parseInt(ctx.query.page || 1, 10);
+  const { tag } = ctx.query;
+  const query = tag ? { tags: tag } : {};
   if (page < 1) {
     ctx.status = 400;
     return;
   }
   try {
-    const posts = await Post.find()
+    const posts = await Post.find(query)
       .sort({ _id: -1 })
       .limit(10)
       .skip((page - 1) * 10)
       .lean()
       .exec();
 
-    const postCount = await Post.count().exec();
-    ctx.set('Last-Page', Math.ceil(postCount / 10));
+    const postCount = await Post.count(query).exec();
     ctx.body = posts.map(post => ({
       ...post,
-      body: post.body.length < 200 ? post.body : `${post.body.slice(0, 200)}...`,
+      body: post.body.length < 350 ? post.body : `${post.body.slice(0, 350)}...`,
     }));
+    ctx.set('Last-Page', Math.ceil(postCount / 10));
   } catch (e) {
     ctx.throw(e, 500);
   }
@@ -76,7 +78,7 @@ exports.read = async (ctx) => {
 
   try {
     const post = await Post.findById(id).exec();
-    if(!post) {
+    if (!post) {
       ctx.status = 404;
       return;
     }
@@ -109,3 +111,11 @@ exports.update = async (ctx) => {
     ctx.throw(e, 500);
   }
 };
+
+exports.checkLogin = (ctx, next) => {
+  if(!ctx.session.logged) {
+    ctx.status = 401;
+    return null;
+  }
+  return next();
+}
