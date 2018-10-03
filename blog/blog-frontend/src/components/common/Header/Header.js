@@ -6,9 +6,7 @@ import Button from 'components/common/Button';
 
 const cx = classNames.bind(styles);
 
-const Header = ({postId, onRemove}) => {
-
-
+const Header = ({postId, onRemove, logged}) => {
 
   return (
     <header className={cx('header')}>
@@ -16,7 +14,7 @@ const Header = ({postId, onRemove}) => {
         <div className={cx('brand')}>
           <Link to="/">react blog</Link>
         </div>
-        <div className={cx('right')}>
+        {logged && <div className={cx('right')}>
           {postId && (
             <Fragment>
               <Button theme="outline" to={`/editor?id=${postId}`}>수정하기</Button>
@@ -24,7 +22,7 @@ const Header = ({postId, onRemove}) => {
             </Fragment>
           )}
           <Button theme="outline" to="/editor">새 포스트</Button>
-        </div>
+        </div>}
       </div>
     </header>
   );

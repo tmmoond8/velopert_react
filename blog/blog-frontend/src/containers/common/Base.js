@@ -6,7 +6,15 @@ import * as baseActions from 'store/modules/base';
 
 class Base extends Component {
   initialize = async () => {
-
+    const { BaseActions } = this.props;
+    if (localStorage.logged === "true") {
+      BaseActions.tempLogin();
+    }
+    try {
+      await BaseActions.checkLogin();
+    } catch(e) {
+      console.error(e);
+    }
   }
 
   componentDidMount() {
@@ -24,7 +32,9 @@ class Base extends Component {
 }
 
 export default connect(
-  null,
+  (state) => ({
+    logged: state.base.logged
+  }),
   (dispatch) => ({
     BaseActions: bindActionCreators(baseActions, dispatch)
   })

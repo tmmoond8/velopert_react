@@ -11,17 +11,27 @@ class FooterContainer extends Component {
     BaseActions.showModal('login');
   }
 
+  handleLogoutClick = async () => {
+    const { BaseActions } = this.props;
+    try {
+      await BaseActions.logout();
+    } catch(e) {
+      console.error(e);
+    }
+  }
+
   render() {
-    const { handleLoginClick } = this;
+    const { handleLoginClick, handleLogoutClick } = this;
+    const { logged } = this.props;
     return (
-      <Footer onLoginClick={handleLoginClick}/>
+      <Footer logged={logged} onLoginClick={handleLoginClick} onLogoutClick={handleLogoutClick}/>
     )
   }
 }
 
 export default connect(
   (state) => ({
-
+    logged: state.base.logged
   }),
   (dispatch) => ({
     BaseActions: bindActionCreators(BaseActions, dispatch)

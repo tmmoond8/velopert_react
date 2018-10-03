@@ -12,6 +12,7 @@ const LOGOUT = 'base/LOGOUT';
 const CHECK_LOGIN = 'base/CHECK_LOGIN';
 const CHANGE_PASSWORD_INPUT = 'base/CHANGE_PASSWORD_INPUT';
 const INITIALIZE_LOGIN_MODAL = 'base/INITIALIZE_LOGIN_MODAL';
+const TEMP_LOGIN = 'base/TEMP_LOGIN';
 
 // acition creators
 export const showModal = createAction(SHOW_MODAL);
@@ -22,6 +23,7 @@ export const logout = createAction(LOGOUT, api.logout);
 export const checkLogin = createAction(CHECK_LOGIN, api.checkLogin);
 export const changePasswordInput = createAction(CHANGE_PASSWORD_INPUT);
 export const initializeLoginModal = createAction(INITIALIZE_LOGIN_MODAL);
+export const tempLogin = createAction(TEMP_LOGIN);
 
 // initial state
 const initialState = { 
@@ -55,7 +57,8 @@ export default handleActions({
   ...pender({
     type: LOGIN,
     onSuccess: (state, action) => {
-      const { success } = action;
+      const { success } = action.payload.data;
+      console.log(state);
       return {
         ...state,
         logged: success
@@ -83,6 +86,15 @@ export default handleActions({
       }
     }
   }),
+  ...pender({
+    type: LOGOUT,
+    onSuccess: (state, action) => {
+      return {
+        ...state,
+        logged: false
+      }
+    }
+  }),
   [CHANGE_PASSWORD_INPUT]: (state, action) => {
     const { payload: value } = action;
     return {
@@ -97,6 +109,12 @@ export default handleActions({
     return {
       ...state,
       loginModal: initialState.loginModal
+    }
+  },
+  [TEMP_LOGIN]: (state, action) => {
+    return {
+      ...state,
+      logged: true
     }
   }
 }, initialState)
