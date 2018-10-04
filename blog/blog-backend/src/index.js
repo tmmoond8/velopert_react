@@ -2,11 +2,15 @@ require('dotenv').config();
 
 const Koa = require('koa');
 const Router = require('koa-router');
+const path = require('path');
+const serve = require('koa-static');
 const bodyParser = require('koa-bodyparser');
 const mongoose = require('mongoose');
 const session = require('koa-session');
 const api = require('./api');
 const ssr = require('./ssr');
+
+const staticPath = path.join(__dirname, '../../blog-frontend/build');
 
 const {
   PORT: port = 4000,
@@ -36,8 +40,9 @@ const sessionConfig = {
 app.use(session(sessionConfig, app));
 app.keys = [signKey];
 
+app.use(serve(staticPath));
 // app 인스턴스에 라우터 적용
-// app.use(router.routes()).use(router.allowedMethods());
+app.use(router.routes()).use(router.allowedMethods());
 app.use(ssr);
 
 app.listen(port, () => {

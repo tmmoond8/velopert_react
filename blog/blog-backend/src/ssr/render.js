@@ -42545,7 +42545,7 @@ var PostList = function PostList(_ref2) {
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     'div',
     { className: cx('post-list') },
-    posts.map(function (post) {
+    posts && posts.map(function (post) {
       return renderItem(post);
     })
   );
