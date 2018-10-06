@@ -14,6 +14,7 @@ const render = async (ctx) => {
 
   const store = configure();
   const promises = [];
+  const context = {};
 
   routes.forEach(route => {
     const match = matchPath(url, route);
@@ -35,11 +36,15 @@ const render = async (ctx) => {
 
   const html = ReactDOMServer.renderToString(
     <Provider store={store}>
-      <StaticRouter location={url}>
+      <StaticRouter location={url} context={context}>
         <App/>
       </StaticRouter>
     </Provider>
   );
+  
+  if (context.NotFound) {
+    ctx.status = 404;
+  }
   return { html, preloadedState: store.getState() };
 }
 

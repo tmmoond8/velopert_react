@@ -18,7 +18,7 @@ function buildHTML({ html, preloadedState }) {
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">${html}</div>
     <script>
-      window.__PRELOADED_STATE__ = ${preloadedState}
+      window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
     </script>
     <script type="text/javascript" src="${manifest['vendor.js']}"></script>
     <script type="text/javascript" src="${manifest['app.js']}"></script>
