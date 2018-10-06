@@ -4,7 +4,8 @@ import App from 'components/App';
 import { Provider } from 'react-redux';
 import configure from 'store/configure';
 
-const store = configure();
+const preloadedState = window.__PRELOADED_STATE__;
+const store = configure(preloadedState);
 
 const Root = () => {
   return (

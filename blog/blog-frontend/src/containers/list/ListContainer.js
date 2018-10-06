@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import PostList from 'components/list/PostList';
 import Pagination from 'components/list/Pagination';
 import * as listActions from 'store/modules/list';
+import shouldCancel from 'lib/shouldCancel';
 
 class ListContainer extends Component {
 
   getPostList = () => {
+    if (shouldCancel()) return;
     const { tag, page, ListActions } = this.props;
     ListActions.getPostList({
       page,

@@ -4,6 +4,12 @@ export default function asyncComponet(getComponent) {
   class AsyncComponet extends Component {
     static Component = null;
 
+    static getComponent = () => {
+      return getComponent().then(({ default: Component }) => {
+        AsyncComponet.Component = Component;
+      });
+    }
+
     state = { Component: AsyncComponet.Component };
 
     constructor(props) {
@@ -22,13 +28,7 @@ export default function asyncComponet(getComponent) {
       }
       return null;
     }
-  }
- 
-  AsyncComponet.getComponent = () => {
-    return getComponent().then(({ default: Component }) => {
-      AsyncComponet.Component = Component;
-    });
-  }
+  }  
 
   return AsyncComponet;
 }
