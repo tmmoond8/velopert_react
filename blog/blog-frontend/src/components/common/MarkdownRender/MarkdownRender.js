@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import styles from './MarkdownRender.scss';
 import classNames from 'classnames/bind';
 import marked from 'marked';
-import Prism from 'prismjs';
+
+// 이부분은 로딩
 import 'prismjs/themes/prism-okaidia.css';
-import 'prismjs/components/prism-bash.min.js';
-import 'prismjs/components/prism-javascript.min.js';
-import 'prismjs/components/prism-jsx.min.js';
-import 'prismjs/components/prism-css.min.js';
+
+let Prism = null;
+const isBrowser = process.env.APP_ENV === 'browser';
+if (isBrowser) {
+  Prism = require('prismjs');
+  require('prismjs/components/prism-bash.min.js');
+  require('prismjs/components/prism-javascript.min.js');
+  require('prismjs/components/prism-jsx.min.js');
+  require('prismjs/components/prism-css.min.js');
+}
 
 const cx = classNames.bind(styles);
 

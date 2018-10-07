@@ -38,7 +38,7 @@ const PostList = ({posts}) => {
 
   return (
     <div className={cx('post-list')}>
-      {posts.map((post) => renderItem(post))}
+      {posts && posts.map((post) => renderItem(post))}
     </div>
   );
 };
