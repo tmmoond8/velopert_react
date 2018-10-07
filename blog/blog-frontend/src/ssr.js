@@ -6,6 +6,7 @@ import configure from 'store/configure';
 import App from 'components/App';
 import axios from 'axios';
 import routes from './routes';
+import { Helmet } from 'react-helmet';
 
 const render = async (ctx) => {
   const { url, origin } = ctx;
@@ -45,7 +46,10 @@ const render = async (ctx) => {
   if (context.NotFound) {
     ctx.status = 404;
   }
-  return { html, preloadedState: store.getState() };
+
+  const helmet = Helmet.renderStatic();
+
+  return { html, preloadedState: store.getState(), helmet};
 }
 
 export default render;

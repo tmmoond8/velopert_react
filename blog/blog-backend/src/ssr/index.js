@@ -2,7 +2,10 @@
 const render = require('./render').default;
 const manifest = require('../../../blog-frontend/build/asset-manifest.json');
 
-function buildHTML({ html, preloadedState }) {
+function buildHTML({ html, preloadedState, helmet }) {
+
+  const { title, meta } = helmet;
+
   return `
   <!doctype html>
   <html lang="en">
@@ -11,7 +14,8 @@ function buildHTML({ html, preloadedState }) {
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="/manifest.json">
-    <title>React App</title>
+    ${title.toString()}
+    ${meta.toString()}
     <link href="${manifest['app.css']}" rel="stylesheet">
   </head>
   <body>
